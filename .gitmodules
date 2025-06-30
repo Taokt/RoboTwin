@@ -1,0 +1,3 @@
+[submodule "assets/embodiments/bimanual_kuka"]
+	path = assets/embodiments/bimanual_kuka
+	url = git@github.com:Taokt/bimanual_kuka.git
