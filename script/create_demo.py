@@ -105,16 +105,23 @@ demo = create_demo(task_name, task_config)
 #     modelname="020_hammer_2",
 # )
 
-## Picking the hammer with the left gripper
-# Get the position of the block's functional point
-block_pose = demo.block.get_functional_point(0, "pose").p
-# Determine which arm to use based on block position (left if block is on left side, else right)
-arm_tag = ArmTag("left" if block_pose[0] < 0 else "right")
 
+## Picking the hammer
+block_pose = demo.block.get_functional_point(0, "pose").p
+arm_tag = ArmTag("left" if block_pose[0] < 0 else "right")
+arm_tag = "right"
 # Grasp the hammer with the selected arm
-# demo.move(demo.grasp_actor(demo.hammer, arm_tag=arm_tag, pre_grasp_dis=0.12, grasp_dis=0.01))
+demo.move(demo.grasp_actor(demo.hammer, arm_tag=arm_tag, pre_grasp_dis=0.12, grasp_dis=0.01))
 # Move the hammer upwards
 # demo.move(demo.move_by_displacement(arm_tag, z=0.07, move_axis="arm"))
+
+
+# Move the gripper to a specific pose
+# pose = demo.robot.left_ee.global_pose
+# pose.p = np.array([0, 0, 1])
+# pose.q = np.array([0.0, -1.0, 0.0, 1.0])
+# actions = [Action(arm_tag, "move", target_pose=pose)]
+# demo.move((arm_tag, actions))
 
 while not demo.viewer.closed:
     demo.scene.step()
