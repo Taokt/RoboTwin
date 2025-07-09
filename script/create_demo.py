@@ -18,7 +18,7 @@ from argparse import ArgumentParser
 current_file_path = os.path.abspath(__file__)
 parent_directory = os.path.dirname(current_file_path)
 
-from envs.beat_block_hammer import *
+# from envs.beat_block_hammer import *
 from collect_data import class_decorator, get_camera_config, get_embodiment_config
 
 def create_demo(task_name, task_config):
@@ -88,14 +88,65 @@ def create_demo(task_name, task_config):
     task.setup_demo(**args)
     return task
 
-# task_name = input("Enter task name (e.g., block_hammer_beat): ")
-# task_name = parser.task_name
-# task_config = parser.task_config
-# task_name = "blocks_ranking_rgb"
-task_name = 'beat_block_hammer'  # You can change this to any task you want to run
+TASKS = {
+    1: "adjust_bottle",
+    2: "beat_block_hammer",
+    3: "blocks_ranking_rgb",
+    4: "blocks_ranking_size",
+    5: "click_alarmclock",
+    6: "clock_bell",
+    7: "dump_bin_bigbin",
+    8: "grab_roller",
+    9: "handover_block",
+    10: "handover_mic",
+    11: "hanging_mug",
+    12: "lift_pot",
+    13: "move_can_pot",
+    14: "move_pillbottle",
+    15: "move_playingcard_away",
+    16: "move_stapler_pad",
+    17: "open_laptop",
+    18: "open_microwave",
+    19: "pick_diverse_bottles",
+    20: "pick_dual_bottles",
+    21: "place_a2b_left",
+    22: "place_a2b_right",
+    23: "place_bread_basket",
+    24: "place_bread_skillet",
+    25: "place_burger_fries",
+    26: "place_can_basket",
+    27: "place_cans_plasticbox",
+    28: "place_container_plate",
+    29: "place_dual_shoes",
+    30: "place_empty_cup",
+    31: "place_fan",
+    32: "place_mouse_pad",
+    33: "place_object_basket",
+    34: "place_object_scale",
+    35: "place_object_stand",
+    36: "place_phone_stand",
+    37: "place_shoe",
+    38: "press_stapler",
+    39: "put_bottles_dustbin",
+    40: "put_object_cabinet",
+    41: "rotate_qrcode",
+    42: "scan_object",
+    43: "shake_bottle",
+    44: "shake_bottle_horizontally",
+    45: "stack_blocks_three",
+    46: "stack_blocks_two",
+    47: "stack_bowls_three",
+    48: "stack_bowls_two",
+    49: "stamp_seal",
+    50: "turn_switch",
+}
+
+# task_name = input("Enter task name or number (e.g., block_hammer_beat): ")
+# task_name = TASKS[int(task_name)] if task_name.isdigit() else task_name
+task_name = TASKS[2] # You can change this to any task you want to run
 task_config = "demo_randomized"
 demo = create_demo(task_name, task_config)
-# demo.play_once() # if you want to run the task
+demo.play_once() # if you want to run the task
 
 
 # Adding a dummy hammer for visualization
@@ -107,11 +158,11 @@ demo = create_demo(task_name, task_config)
 
 
 ## Picking the hammer
-block_pose = demo.block.get_functional_point(0, "pose").p
-arm_tag = ArmTag("left" if block_pose[0] < 0 else "right")
-arm_tag = "right"
+# block_pose = demo.block.get_functional_point(0, "pose").p
+# arm_tag = ArmTag("left" if block_pose[0] < 0 else "right")
+
 # Grasp the hammer with the selected arm
-demo.move(demo.grasp_actor(demo.hammer, arm_tag=arm_tag, pre_grasp_dis=0.12, grasp_dis=0.01))
+# demo.move(demo.grasp_actor(demo.hammer, arm_tag=arm_tag, pre_grasp_dis=0.12, grasp_dis=0.01))
 # Move the hammer upwards
 # demo.move(demo.move_by_displacement(arm_tag, z=0.07, move_axis="arm"))
 
